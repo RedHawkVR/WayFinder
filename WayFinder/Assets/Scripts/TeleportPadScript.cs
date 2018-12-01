@@ -17,12 +17,15 @@ public class TeleportPadScript : MonoBehaviour {
 
 	public static bool IsActive { get; set; }
 
+	public bool forceActive = false;
+
 	// Use this for initialization
 	void Start () {
 		IsActive = false;
 		meshRenderer = gameObject.GetComponent<MeshRenderer>();
 		x = transform.position.x;
 		z = transform.position.z;
+		if (forceActive) IsActive = true;
 	}
 	
 	// Update is called once per frame
