@@ -13,7 +13,7 @@ public class HandControllerInput : MonoBehaviour {
 	public GameObject player;
 	public LayerMask laserMask;
 	public static float yNudgeAmount = 1f; // specific to teleportAimerObject height
-	private static readonly Vector3 yNudgeVector = new Vector3(0f, yNudgeAmount, 0f);
+	//private static readonly Vector3 yNudgeVector = new Vector3(0f, yNudgeAmount, 0f);
 
 	// Boundary Checks
 	public float minXBoundary = -12.0f, maxXBoundary = 12.0f;

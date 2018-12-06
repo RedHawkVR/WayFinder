@@ -29,7 +29,7 @@ public class Levitate : MonoBehaviour
 		newLocation = this.transform.position;
 		locationUpdated = false;
 		rigidBody = GetComponent<Rigidbody>();
-		childParticleSystem.enableEmission = false;
+		childParticleSystem.enableEmission = false; // I know unity is saying to use emission.enabled instead, but there's no set permission for it.
 	}
 
 	void Update()

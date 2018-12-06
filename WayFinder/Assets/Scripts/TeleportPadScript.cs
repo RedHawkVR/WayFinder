@@ -15,9 +15,9 @@ public class TeleportPadScript : MonoBehaviour {
 	private bool hasChanged = false;
 	private float x, z;
 
-	public static bool IsActive { get; set; }
+	public static bool IsActive { get; set; } // set this to true whenever a puzzle is completed
 
-	public bool forceActive = false;
+	public bool forceActive = false; // for scenes without puzzles to be done
 
 	// Use this for initialization
 	void Start () {
@@ -34,15 +34,20 @@ public class TeleportPadScript : MonoBehaviour {
 		{
 			if (!hasChanged)
 			{
-				meshRenderer.material = activeMaterial;
-				particleObject.SetActive(true);
-				hasChanged = true;
+				LevelComplete();
 			}
 			if((Mathf.Abs(player.transform.position.x - x) <= buffer) && 
 				(Mathf.Abs(player.transform.position.z - z) <= buffer)){
 				NextLevel();
 			}
 		}
+	}
+
+	public void LevelComplete()
+	{
+		meshRenderer.material = activeMaterial;
+		particleObject.SetActive(true);
+		hasChanged = true;
 	}
 
 	private void NextLevel()
