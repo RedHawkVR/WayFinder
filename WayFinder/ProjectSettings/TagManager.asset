@@ -8,6 +8,8 @@ TagManager:
   - FxTemporaire
   - grabbable
   - target
+  - Wrong Medal
+  - Right Medal
   layers:
   - Default
   - TransparentFX
