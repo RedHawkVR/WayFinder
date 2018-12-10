@@ -19,8 +19,8 @@ TagManager:
   - 
   - PostProcessing
   - Teleportable
-  - 
-  - 
+  - Medal
+  - Poster
   - 
   - 
   - 
@@ -44,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Medal
+    uniqueID: 2212317697
+    locked: 0
+  - name: Poster
+    uniqueID: 2704010467
     locked: 0
