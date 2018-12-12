@@ -17,7 +17,7 @@ public class StartGame : MonoBehaviour {
 			device = SteamVR_Controller.Input((int)trackedObject.index);
 			if (device.GetPress(SteamVR_Controller.ButtonMask.Grip))
 			{
-				SteamVR_LoadLevel.Begin("Scene0");
+				SteamVR_LoadLevel.Begin("StartScene");
 			}
 		}
 	}

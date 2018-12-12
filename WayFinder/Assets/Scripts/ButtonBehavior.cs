@@ -7,6 +7,7 @@ public class ButtonBehavior : MonoBehaviour {
 
 	public SteamVR_TrackedObject trackedObject;
 	public SteamVR_Controller.Device device;
+	public string SceneName = "StartScene";
 
 	void Start()
 	{
@@ -17,19 +18,15 @@ public class ButtonBehavior : MonoBehaviour {
 	{
 		device = SteamVR_Controller.Input((int)trackedObject.index);
 		// trigger pressed down
-		if (device.GetPress(SteamVR_Controller.ButtonMask.Trigger))
+		if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)
+				|| device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
 		{
-			Play();
+			SteamVR_LoadLevel.Begin(SceneName);
 		}
 	}
 
-	public void Play()
-    {
-        SceneManager.LoadScene("StartScene");
-    }
-
-    public void Exit()
-    {
-        Application.Quit();
-    }
+	public void Exit()
+	{
+		Application.Quit();
+	}
 }

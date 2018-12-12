@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WallVanish : MonoBehaviour {
 
-    public GameObject Trigger;
+    //public GameObject Trigger;
     Vector3 defposition,newposition;
     bool moved;
 	// Use this for initialization
@@ -16,11 +16,14 @@ public class WallVanish : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Trigger.GetComponent<Candle>().triggered&&moved==false)//checks if the first challenge is cleared and if the first disappearing wall has not moved
+        if (Candle.triggered && !moved)//checks if the first challenge is cleared and if the first disappearing wall has not moved
         {
-            newposition.y -= 15;
-            transform.position = newposition;
+            //newposition.y -= 15.0f;
+			newposition = new Vector3(transform.position.x, transform.position.y + 15.0f, transform.position.z);
+			transform.Translate(newposition);
+            //transform.position = newposition;
             moved = true;
+			Debug.Log("moved!");
         }
 	}
 

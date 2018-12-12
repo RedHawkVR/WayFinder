@@ -10,9 +10,9 @@ public class EEGStuff : MonoBehaviour {
     private int recordedAttention = 0;
 
 	//[SerializeField]
-    //private int recordedMeditation = 0;
+	//private int recordedMeditation = 0;
 
-	public int attention { get; set; }
+	public static int Attention;
 
     
     // Use this for initialization
@@ -20,17 +20,17 @@ public class EEGStuff : MonoBehaviour {
         controller = GameObject.Find("NeuroSkyTGCController").GetComponent<TGCConnectionController>();
         controller.UpdateAttentionEvent += OnUpdateAttention;
         //controller.UpdateMeditationEvent += OnUpdateMeditation;
-        attention = recordedAttention;
+        Attention = recordedAttention;
     }
-	
+	/*
 	// Update is called once per frame
 	void Update () {
         attention = recordedAttention;
 	}
-
+	*/
     void OnUpdateAttention(int value)
     {
-        recordedAttention = value;
+		Attention = value;
     }
 	/*
     void OnUpdateMeditation(int value)

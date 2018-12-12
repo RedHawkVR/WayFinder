@@ -5,7 +5,7 @@ using UnityEngine;
 public class Candle : MonoBehaviour {
 
     public GameObject player;
-    public bool triggered;
+    public static bool triggered;
 	private Light candleLight;
 
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class Candle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (triggered == false)//concentration means more light as long as under max range of 20
-            if (player.GetComponent<EEGStuff>().attention >= 50)
+            if (EEGStuff.Attention >= 50.0f)
                 if(candleLight.range<20.0f)
                     candleLight.range++;
         if (candleLight.range >= 20.0f)
