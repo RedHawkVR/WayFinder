@@ -9,7 +9,13 @@ public class TeleportPadScript : MonoBehaviour {
 	public GameObject particleObject;
 	public GameObject player;
 	public string nextScene;
-	public float buffer = 1.0f;
+	public float buffer = 1.5f;
+
+	// puzzle 1 stuff
+    public GameObject CorrectTrigger;//how to activate the portal
+    public GameObject FalseTrigger1, FalseTrigger2;//traps that reset the level
+    public GameObject ObjectControl;
+	public bool isPuzzle1 = false;
 
 	private MeshRenderer meshRenderer;
 	private bool hasChanged = false;
@@ -41,6 +47,16 @@ public class TeleportPadScript : MonoBehaviour {
 				NextLevel();
 			}
 		}
+        else if(isPuzzle1)
+        {
+            if (CorrectTrigger.GetComponent<CrystalTrigger>().triggered)
+                IsActive = true;
+            if(FalseTrigger1.GetComponent<CrystalTrigger>().triggered||FalseTrigger2.GetComponent<CrystalTrigger>().triggered)
+            {
+                ObjectControl.GetComponent<ObjectController>().Default();
+            }
+        }
+        
 	}
 
 	public void LevelComplete()
@@ -54,7 +70,8 @@ public class TeleportPadScript : MonoBehaviour {
 	{
 		try
 		{
-			SceneManager.LoadScene(nextScene);
+			TeleportPadScript.IsActive = true;
+			//SceneManager.LoadScene(nextScene);
 		}
 		catch
 		{

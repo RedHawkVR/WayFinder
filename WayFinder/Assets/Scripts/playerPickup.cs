@@ -31,7 +31,10 @@ public class RightMedal : MonoBehaviour {
     void SetCountText()
     {
         countText.text = "Medal Count: " + count.ToString();
-        if (count == 3)
-            SceneManager.LoadScene("PuzzleRoom3");
+		if (count == 3)
+		{
+			//SceneManager.LoadScene("PuzzleRoom3");
+			TeleportPadScript.IsActive = true;
+		}
     }
 }

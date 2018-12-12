@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ButtonBehavior : MonoBehaviour {
 
-	public void play()
+	public void Play()
     {
         SceneManager.LoadScene("Training");
     }
 
-    public void exit()
+    public void Exit()
     {
         Application.Quit();
     }
