@@ -20,7 +20,7 @@ public class CrystalTrigger : MonoBehaviour {
         {
             triggered = true;
         }
-		else if(Vector3.distance(transform.position,player.transform.position)<=3)
+		else if(Vector3.distance(transform.position,player.transform.position)<=1.75)
 		{
 			triggered = true;
 		}
