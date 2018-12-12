@@ -11,7 +11,7 @@ public class Candle : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         triggered = false;
-		candleLight = GetComponent<Light>();
+		candleLight = gameObject.GetComponentInChildren<Light>();
 	}
 	
 	// Update is called once per frame

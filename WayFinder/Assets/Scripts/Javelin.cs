@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class Javelin : MonoBehaviour {
 
-	public GameObject particleObject;
-	private GameObject parentObject;
-	public GameObject player;
+	private Rigidbody javelinRigidbody;
+	private Vector3 startPos;
+	private Quaternion startRot;
+	public float minBoundary = -13.0f, maxBoundary = 13.0f;
 
 	// Use this for initialization
 	void Start () {
-		particleObject.SetActive(false);
-		parentObject = this.transform.parent.gameObject;
+		javelinRigidbody = gameObject.GetComponent<Rigidbody>();
+		startPos = transform.position;
+		startRot = transform.rotation;
 	}
 
-	public void ToggleParticles()
+	private void LateUpdate()
 	{
-		if (parentObject != null)
+		if(transform.position.x > maxBoundary || transform.position.x < minBoundary ||
+			transform.position.z > maxBoundary || transform.position.z < minBoundary)
 		{
-			if (parentObject == player)
-			{
-				particleObject.SetActive(true);
-				return;
-			}
+			ResetObject();
 		}
-		particleObject.SetActive(false);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void ResetObject()
 	{
-		if(collision.gameObject.CompareTag("target"))
-		{
-			TeleportPadScript.IsActive = true;
-		}
+		javelinRigidbody.velocity = new Vector3(0, 0, 0);
+		javelinRigidbody.useGravity = false;
+		javelinRigidbody.isKinematic = true;
+		transform.position = startPos;
+		transform.rotation = startRot;
 	}
+
 }

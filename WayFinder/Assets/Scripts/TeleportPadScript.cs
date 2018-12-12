@@ -70,8 +70,7 @@ public class TeleportPadScript : MonoBehaviour {
 	{
 		try
 		{
-			TeleportPadScript.IsActive = true;
-			//SceneManager.LoadScene(nextScene);
+			SceneManager.LoadScene(nextScene);
 		}
 		catch
 		{

@@ -8,20 +8,40 @@ public class TargetBehaviour : MonoBehaviour
 	TGCConnectionController controller;
 
 	private float recordedAttention = 0;
-	//private int recordedMeditation = 0;
 	private bool valuesUpdated = false;
 	private bool hasBeenHit = false;
-	//private Color transparency;
-	public GameObject[] children;
-	private float timer = 0.0f;
 
-	public float interval = 3.0f;
+	private bool movingLeft = false;
+	private float moveSpeed = 10.001f;
+	private float minRange, maxRange;
+	public float moveRange = 3.0f;
+	public bool trackX = false; // will otherwise track the z position
 
 	// Use this for initialization
 	void Start()
 	{
-		controller = GameObject.Find("NeuroSkyTGCController").GetComponent<TGCConnectionController>();
-		controller.UpdateAttentionEvent += OnUpdateAttention;
+		/*
+		try
+		{
+			controller = GameObject.Find("NeuroSkyTGCController").GetComponent<TGCConnectionController>();
+			controller.UpdateAttentionEvent += OnUpdateAttention;
+		}
+		catch(System.Exception e)
+		{
+			Debug.Log("Target Error: " + e);
+			controller = null;
+		}
+		*/
+		if (trackX)
+		{
+			minRange = transform.position.x - moveRange;
+			maxRange = transform.position.x + moveRange;
+		}
+		else
+		{
+			minRange = transform.position.z - moveRange;
+			maxRange = transform.position.z + moveRange;
+		}
 		//controller.UpdateMeditationEvent += OnUpdateMeditation;
 		//transparency = gameObject.GetComponent<Renderer>().material.color;
 	}
@@ -29,54 +49,35 @@ public class TargetBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		timer += Time.deltaTime;
-		if (timer >= interval && !hasBeenHit)
+		if (trackX)
 		{
-			if (valuesUpdated)
-			{
-				foreach (GameObject child in children)
-				{
-					Color color = child.GetComponent<Renderer>().material.color;
-					color.a = recordedAttention;
-					gameObject.tag = (recordedAttention >= 0.5f) ? "target" : "Untagged";
-				}
-				/*
-				transparency.a = recordedAttention;
-				if (transparency.a >= 0.5f)
-				{
-					this.gameObject.tag = "target";
-				}
-				else
-				{
-					this.gameObject.tag = "Untagged";
-				}
-				*/
-				valuesUpdated = false;
-			}
+			this.transform.position = new Vector3(Mathf.PingPong(Time.time * (moveSpeed-recordedAttention), moveRange),
+				transform.position.y, transform.position.z);
+		}
+		else
+		{
+			this.transform.position = new Vector3(transform.position.x,
+				transform.position.y, Mathf.PingPong(Time.time * (moveSpeed-recordedAttention), moveRange));
 		}
 	}
 
 	void OnUpdateAttention(int value)
 	{
 		// value is 0 to 100, but alpha is 0.0 thru 1.0
-		recordedAttention = value / 100.0f;
+		//recordedAttention = value / 100.0f;
+		recordedAttention = value / 10.0f; // 0 - 10.0f
 		valuesUpdated = true;
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (gameObject.CompareTag("grabbable"))
+		if (collision.gameObject.CompareTag("javelin"))
 		{
 			if (!hasBeenHit)
 			{
-				//transparency.a = 1.0f;
-				foreach (GameObject child in children)
-				{
-					Color color = child.GetComponent<Renderer>().material.color;
-					color.a = 1.0f;
-				}
 				TargetController.TargetCount += 1;
 				hasBeenHit = true;
+				Destroy(gameObject, 0.5f);
 			}
 		}
 	}
