@@ -11,16 +11,14 @@ public class TargetBehaviour : MonoBehaviour
 	private bool valuesUpdated = false;
 	private bool hasBeenHit = false;
 
-	private bool movingLeft = false;
-	private float moveSpeed = 10.001f;
-	private float minRange, maxRange;
+	private readonly float moveSpeed = 10.001f;
 	public float moveRange = 3.0f;
 	public bool trackX = false; // will otherwise track the z position
 
 	// Use this for initialization
 	void Start()
 	{
-		/*
+		
 		try
 		{
 			controller = GameObject.Find("NeuroSkyTGCController").GetComponent<TGCConnectionController>();
@@ -30,17 +28,6 @@ public class TargetBehaviour : MonoBehaviour
 		{
 			Debug.Log("Target Error: " + e);
 			controller = null;
-		}
-		*/
-		if (trackX)
-		{
-			minRange = transform.position.x - moveRange;
-			maxRange = transform.position.x + moveRange;
-		}
-		else
-		{
-			minRange = transform.position.z - moveRange;
-			maxRange = transform.position.z + moveRange;
 		}
 		//controller.UpdateMeditationEvent += OnUpdateMeditation;
 		//transparency = gameObject.GetComponent<Renderer>().material.color;
