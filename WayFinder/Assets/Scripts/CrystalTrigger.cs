@@ -20,11 +20,12 @@ public class CrystalTrigger : MonoBehaviour {
         {
             triggered = true;
         }
-		if(Vector3.Distance(transform.position, player.transform.position) <= 3.00f)
+
+		if (Vector3.Distance(transform.position, player.transform.position) <= 3.00f)
 		{
 			triggered = true;
 		}
-		
+
 	}
 
     public void Default()
